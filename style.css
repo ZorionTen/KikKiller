@@ -1,0 +1,53 @@
+:root {
+    --bg-dark:hsl(216,41%,8%);
+    --bg-normal:hsl(216, 41%, 18%);
+    --bg-light:hsl(216, 41%, 28%);
+    --accent-normal: hsl(180, 75%, 45%);
+    --accent-light: hsl(180, 75%, 60%);
+    --text:white;
+    --placeholder:hsl(216, 20%, 64%);
+}
+
+*{
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--bg-dark);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: monospace;
+    width: 100vw;
+    margin: 0%;
+    padding: 0%;
+    overflow: hidden;
+    display: flex;
+}
+
+nav {
+    background-color: var(--bg-normal);
+}
+
+.form{
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.form button {
+    background-color: var(--accent-normal);
+    color: var(--bg-dark);
+}
+
+.form button:hover {
+    background-color: var(--accent-light);
+}
+
+input {
+    background-color: var(--bg-light);
+    color: var(--text);
+}
+
+::placeholder {
+    color: var(--placeholder);
+  }
