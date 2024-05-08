@@ -13,9 +13,6 @@ export class Base {
                 justifyContent: "center",
                 alignItems: "center",
             });
-        this.children.map((x) => {
-            this.element.appendChild(x.render());
-        });
         if (this.content) {
             this.element.innerText = this.content;
         }
@@ -24,6 +21,7 @@ export class Base {
     }
     append(component) {
         this.children.push(component);
+        this.element.appendChild(component.render());
     }
     style(style) {
         this.cssStyle = { ...style, ...this.cssStyle };
@@ -32,5 +30,17 @@ export class Base {
         for (let i in this.cssStyle) {
             this.element.style[i] = this.cssStyle[i];
         }
+    }
+    update() {
+        this.element.innerHTML = "";
+        this.render();
+    }
+    clear() {
+        this.element.innerHTML = "";
+        return this;
+    }
+    removeChild(child) {
+        this.element.removeChild(child.element);
+        this.children.splice(this.children.indexOf(child), 1);
     }
 }

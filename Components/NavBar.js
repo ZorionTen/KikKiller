@@ -17,7 +17,12 @@ export class NavBar extends Base {
     }
     addLinks(x) {
         for (let i in x) {
-            this.element.innerHTML+=`<a style='text-decoration:none; color: inherit;' href="${x[i]}">${i}</a>`;
+            let action = document.createElement("span");
+            action.className = "action"
+            action.innerHTML = i;
+            action.onclick = x[i];
+            this.element.appendChild(action);
         }
     }
+    
 }   

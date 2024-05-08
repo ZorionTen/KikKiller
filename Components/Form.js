@@ -1,6 +1,6 @@
 import { Card } from './Card.js';
 export class Form extends Card {
-    constructor(url, method, fields = [], onsubmit = (data) => { console.log(data); },header = false) {
+    constructor(url, button_text, method, fields = [], onsubmit = (data) => { console.log(data); }, header = false) {
         super('div');
         this.url = url;
         this.method = method;
@@ -8,6 +8,7 @@ export class Form extends Card {
         this.callback = onsubmit;
         this.inputElements = {};
         this.header = header;
+        this.button_text = button_text;
     }
     createInput(data) {
         let style = `
@@ -50,7 +51,7 @@ export class Form extends Card {
         let button = document.createElement("button");
         button.style = button_style;
         button.type = "submit";
-        button.innerText = "Submit";
+        button.innerText = this.button_text;
         button.onclick = () => {
             let data = {};
             for (let i in this.inputElements) {
@@ -66,17 +67,27 @@ export class Form extends Card {
             this.append(x);
         }
     }
-    getValue(input){
+    getValue(input) {
         let val = input.value;
-        if(input.required && val == ""){
+        if (input.required && val == "") {
             this.triggerRequiredError(input);
             return false;
         }
         return val;
     }
-    triggerRequiredError(input){
+    triggerRequiredError(input) {
         input.style.outline = "1px solid red";
-        setTimeout(()=>input.style.outline = "none", 500);
+        setTimeout(() => input.style.outline = "none", 500);
         return false;
+    }
+    update({ url = this.url, button_text = this.button_text, method = this.method, fields = this.fields, onsubmit = this.callback, header = this.header }) {
+        this.url = url;
+        this.method = method;
+        this.fields = fields;
+        this.callback = onsubmit;
+        this.inputElements = {};
+        this.header = header;
+        this.button_text = button_text;
+        super.update();
     }
 }   

@@ -20,16 +20,16 @@ DI.Request = {
             .then((data) => callback(data));
     },
     get: (url, callback = (r) => console.log(r)) => {
-        this.getLike(url, "GET", callback);
+        DI.Request.getLike(url, "GET", callback);
     },
     delete: (url, callback = (r) => console.log(r)) => {
-        this.getLike(url, "DELETE", callback);
+        DI.Request.getLike(url, "DELETE", callback);
     },
     post: (url, data, callback = (r) => console.log(r)) => {
-        this.postLike(url, data, callback);
+        DI.Request.postLike(url, data, callback);
     },
     patch: (url, data, callback = (r) => console.log(r)) => {
-        this.postLike(url, data, callback);
+        DI.Request.postLike(url, data, callback);
     },
     headers: Config.HEADERS
 }
