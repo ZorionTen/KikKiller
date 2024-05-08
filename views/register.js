@@ -1,8 +1,8 @@
-import { Page } from '../Components/Page.js';
+import Login from './login.js';
 import { Form } from '../Components/Form.js';
 import { Footer } from '../Components/Footer.js';
 
-export default class Login extends Page {
+export default class Register extends Login {
     constructor() {
         super('div');
     }
@@ -17,33 +17,29 @@ export default class Login extends Page {
                 type: "password",
                 name: "password",
                 placeholder: "Password"
+            },
+            {
+                type: "password",
+                name: "confirm_password",
+                placeholder: "Confirm password"
             }
         ];
         let url = this.getConfig().LINKS.login;
         let form_header = `<div style="text-align:center;"><img src="assets/logo.png" alt="logo" height="100" width="100"/></div>`;
-        let login_form = new Form(url, "Login", "POST", form_data, (data) => this.doLogin(data), form_header);
+        let login_form = new Form(url, "Sign Up", "POST", form_data, (data) => this.doRegister(data), form_header);
         let footer = new Footer();
         footer.addLinks(
             {
-                "Register": () =>{
-                    this.getRouter().load_page("register");
+                "Login": () => {
+                    this.getRouter().load_page("login");
                 }
             }
         )
         this.append(login_form);
         this.append(footer);
     }
-    render() {
-        this.prepare();
-        this.style({
-            backgroundImage: "url('assets/bg.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-        })
-        return super.render();
-    }
-    doLogin(data) {
-        let url = this.getConfig().LINKS.login;
+    doRegister(data) {
+        let url = this.getConfig().LINKS.register;
         this.getDi().Request.post(url, data, (data) => {
             console.log(data);
         });

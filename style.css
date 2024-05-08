@@ -1,16 +1,18 @@
 :root {
-    --bg-dark:hsl(216,41%,8%);
-    --bg-normal:hsl(216, 41%, 18%);
-    --bg-light:hsl(216, 41%, 28%);
+    --bg-dark: hsl(216, 41%, 8%);
+    --bg-normal: hsl(216, 41%, 18%);
+    --bg-light: hsl(216, 41%, 28%);
     --accent-normal: hsl(180, 75%, 45%);
     --accent-light: hsl(180, 75%, 60%);
-    --text:white;
-    --placeholder:hsl(216, 20%, 64%);
+    --text: white;
+    --fg-link: hsl(180, 75%, 60%);
+    --placeholder: hsl(216, 20%, 64%);
 }
 
-*{
+* {
     box-sizing: border-box;
 }
+
 body {
     background-color: var(--bg-dark);
     color: var(--text);
@@ -30,7 +32,7 @@ nav {
     background-color: var(--bg-normal);
 }
 
-.form{
+.form {
     background-color: rgba(0, 0, 0, 0.35);
 }
 
@@ -50,4 +52,9 @@ input {
 
 ::placeholder {
     color: var(--placeholder);
-  }
+}
+
+.footer {
+    background-color: transparent;
+    color: var(--fg-link);
+}
