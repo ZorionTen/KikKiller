@@ -23,7 +23,7 @@ export class Form extends Card {
         this.inputElements[data.name].type = data.type;
         this.inputElements[data.name].name = data.name;
         this.inputElements[data.name].placeholder = data.placeholder;
-        this.inputElements[data.name].required = true;
+        this.inputElements[data.name].required = data.required || false;
         return this.inputElements[data.name];
     }
     render() {
@@ -55,7 +55,11 @@ export class Form extends Card {
         button.onclick = () => {
             let data = {};
             for (let i in this.inputElements) {
+                this.inputElements[i].checkValidity();
                 data[i] = this.getValue(this.inputElements[i]);
+                if (!data[i]) {
+                    return false;
+                }
             }
             this.callback(data);
         }
@@ -76,8 +80,12 @@ export class Form extends Card {
         return val;
     }
     triggerRequiredError(input) {
-        input.style.outline = "1px solid red";
-        setTimeout(() => input.style.outline = "none", 500);
+        input.style.outline = "2px solid red";
+        input.style.outlineOffset = "-5px";
+        setTimeout(() => {
+            input.style.outlineOffset = "0px";
+            input.style.outline = "none"
+        }, 1000);
         return false;
     }
     update({ url = this.url, button_text = this.button_text, method = this.method, fields = this.fields, onsubmit = this.callback, header = this.header }) {

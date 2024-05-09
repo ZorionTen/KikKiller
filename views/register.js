@@ -10,18 +10,27 @@ export default class Register extends Login {
         let form_data = [
             {
                 type: "text",
+                name: "email",
+                placeholder: "Email",
+                required: true
+            },
+            {
+                type: "text",
                 name: "username",
-                placeholder: "Username"
+                placeholder: "Username",
+                required: true
             },
             {
                 type: "password",
                 name: "password",
-                placeholder: "Password"
+                placeholder: "Password",
+                required: true
             },
             {
                 type: "password",
                 name: "confirm_password",
-                placeholder: "Confirm password"
+                placeholder: "Confirm password",
+                required: true
             }
         ];
         let url = this.getConfig().LINKS.login;
@@ -41,7 +50,9 @@ export default class Register extends Login {
     doRegister(data) {
         let url = this.getConfig().LINKS.register;
         this.getDi().Request.post(url, data, (data) => {
-            console.log(data);
+            if (data.success) {
+                this.getRouter().load_page("login");
+            }
         });
     }
 }

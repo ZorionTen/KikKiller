@@ -5,11 +5,12 @@ Config.HEADERS = {
     "Accept": "application/json"
 }
 
-Config.HOST = "http://localhost:5000";
+Config.HOST = "";
 
 Config.LINKS = {
-    getChat: `${Config.HOST}/chats`,
+    get_chat: `${Config.HOST}/chats`,
     login: `${Config.HOST}/user/login`,
     register: `${Config.HOST}/user/register`,
-    getMessages: `${Config.HOST}/messages`,
+    get_messages: `${Config.HOST}/messages`,
+    get_user: `${Config.HOST}/user`,
 }

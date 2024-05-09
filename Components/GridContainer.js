@@ -26,7 +26,7 @@ export class GridContainer extends Base {
     }
     addChildren(x) {
         for (let i in x) {
-            this.append(x);
+            this.append(i);
         }
     }
 }   

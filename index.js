@@ -22,5 +22,10 @@ const render = () => {
 }
 
 onload = () => {
-    Router.load_page('login');
+    if (localStorage.getItem("token")) {
+        Router.load_page('home');
+        console.log("token: " + localStorage.getItem("token"));
+    } else {
+        Router.load_page('login');
+    }
 }
