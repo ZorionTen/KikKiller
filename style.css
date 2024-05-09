@@ -7,10 +7,12 @@
     --text: white;
     --fg-link: hsl(180, 75%, 60%);
     --placeholder: hsl(216, 20%, 64%);
+    --error: hsl(0, 80%, 60%);
 }
 
 * {
     box-sizing: border-box;
+    transition: all 0.3s ease;
 }
 
 body {
@@ -57,4 +59,13 @@ input {
 .footer {
     background-color: transparent;
     color: var(--fg-link);
+}
+
+.toast p {
+    background-color: var(--bg-dark);
+}
+
+.toast.error {
+    background-color: var(--error);
+    color: inherit;
 }

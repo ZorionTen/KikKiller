@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, send_file, abort
 from pymongo import MongoClient
+from bson import ObjectId, json_util
 import os
 
 client = MongoClient(os.environ.get("DB_STRING"))
@@ -34,28 +35,52 @@ def register():
                 return Response.fail('Failed to register')
     return Response.missing_required(['username', 'password', 'confirm_password'] - set(data.keys()))
 
+
 @app.route('/user/login', methods=['POST'])
 def login():
     data = request.get_json()
-    if 'username' in data and 'password' in data:
-        user = DB['users'].find_one({'username': data['username']})
+    if 'email' in data and 'password' in data:
+        user = DB['users'].find_one({'email': data['email']})
         if user and user['password'] == Security.hash(data['password']):
             return Response.success({'id': str(user['_id'])})
+        else:
+            return Response.not_found('User not found')
     return Response.fail('Failed to login')
 
+
+@app.route('/user')
+def get_user():
+    id = request.args.get('id')
+    if id:
+        user = DB['users'].find_one({'_id': ObjectId(id)})
+        if user:
+            return Response.success(dict(user))
+    return Response.not_found('User not found')
+
 # Helper functions
+
+
 class Response:
+
+    @staticmethod
+    def prepare(data, status_code, headers={'content-type': 'application/json'}):
+        return json_util.dumps(data), status_code, headers
+
     @staticmethod
     def missing_required(fields):
-        return {'success': False, 'error': 'Missing required fields: ' + ', '.join(fields)}
+        return Response.prepare({'success': False, 'error': 'Missing required fields: ' + ', '.join(fields)}, 422)
 
     @staticmethod
     def success(data):
-        return {'success': True, 'data': data}
+        return Response.prepare({'success': True, 'data': data}, 200)
 
     @staticmethod
     def fail(message):
-        return {'success': False, 'message': message}
+        return Response.prepare({'success': False, 'message': message}, 403)
+
+    @staticmethod
+    def not_found(message):
+        return Response.prepare({'success': False, 'message': message}, 404)
 
 
 class Security:
@@ -66,8 +91,9 @@ class Security:
         for char in password:
             password_sum += str(ord(char))
         larger_number = ""
-        for i in range(0,len(password_sum),8):
-            larger_number = larger_number + hex(int(password_sum[i:i+8])*key)[2:]
+        for i in range(0, len(password_sum), 8):
+            larger_number = larger_number + \
+                hex(int(password_sum[i:i+8])*key)[2:]
         return larger_number
 
 

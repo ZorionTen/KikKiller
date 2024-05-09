@@ -9,14 +9,16 @@ export default class Login extends Page {
     prepare() {
         let form_data = [
             {
-                type: "text",
-                name: "username",
-                placeholder: "Username"
+                type: "email",
+                name: "email",
+                placeholder: "Email",
+                required: true
             },
             {
                 type: "password",
                 name: "password",
-                placeholder: "Password"
+                placeholder: "Password",
+                required: true
             }
         ];
         let url = this.getConfig().LINKS.login;
@@ -25,7 +27,7 @@ export default class Login extends Page {
         let footer = new Footer();
         footer.addLinks(
             {
-                "Register": () =>{
+                "Register": () => {
                     this.getRouter().load_page("register");
                 }
             }
@@ -45,7 +47,10 @@ export default class Login extends Page {
     doLogin(data) {
         let url = this.getConfig().LINKS.login;
         this.getDi().Request.post(url, data, (data) => {
-            console.log(data);
+            if (data.success) {
+                localStorage.setItem("token", data.data.id);
+                this.getRouter().load_page("home");
+            }
         });
     }
 }

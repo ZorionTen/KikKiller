@@ -11,7 +11,7 @@ export class Base {
                 gap: "1rem",
                 padding: "1rem",
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "center"
             });
         if (this.content) {
             this.element.innerText = this.content;
