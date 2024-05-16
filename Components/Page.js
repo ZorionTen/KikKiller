@@ -2,6 +2,7 @@ import { Base } from './Base.js';
 export class Page extends Base {
     constructor() {
         super('div');
+        this.element.classList.add("page");
     }
     render() {
         let toast_area = document.createElement("div");
@@ -15,14 +16,17 @@ export class Page extends Base {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            gap: "1rem",
+            gap: "1rem"
         };
         Object.entries(styles).map(([k, v]) => toast_area.style[k] = v);
         document.body.appendChild(toast_area);
         this.style(
             {
                 width: "100%",
-                height: "100%"
+                height: "100%",
+                flexDirection: "column",
+                padding: "0rem",
+                margin: "0px",
             });
         return super.render();
     }

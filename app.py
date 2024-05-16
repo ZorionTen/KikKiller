@@ -57,6 +57,12 @@ def get_user():
             return Response.success(dict(user))
     return Response.not_found('User not found')
 
+@app.route('/user/<id>/chats')
+def get_chats(id):
+    return Response.success(list(DB['chats'].find({'members': ObjectId(id)})))
+@app.route('/favicon.ico')
+def favicon():
+    return send_file('assets/logo.png', mimetype='image/png')
 # Helper functions
 
 
@@ -64,7 +70,8 @@ class Response:
 
     @staticmethod
     def prepare(data, status_code, headers={'content-type': 'application/json'}):
-        return json_util.dumps(data), status_code, headers
+        final_data = data
+        return json_util.dumps(final_data), status_code, headers
 
     @staticmethod
     def missing_required(fields):

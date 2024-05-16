@@ -69,3 +69,31 @@ input {
     background-color: var(--error);
     color: inherit;
 }
+
+.z-chat-card {
+    border-color: black;
+}
+
+.z-chat-card:hover {
+    background-color: var(--bg-light);
+}
+
+.z-chat-card .img {
+    background-color: var(--bg-light);
+}
+
+.action-bar {
+    background-image: linear-gradient(to bottom, var(--bg-light)50%, var(--bg-dark) 51%);
+}
+
+.action-bar .z-tab {
+    background-color: var(--bg-dark);
+}
+
+.action-bar .z-button {
+    background-color: var(--bg-light);
+}
+
+.page {
+    /* background-image: url('/assets/bg.png'); */
+}

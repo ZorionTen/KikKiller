@@ -9,7 +9,7 @@ export class NavBar extends Base {
             top: "0px",
             right: "0px",
             width: "100%",
-            height: "auto",
+            height: "3rem",
             justifyContent: "end",
         };
         this.style(style);
