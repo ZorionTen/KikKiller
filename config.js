@@ -13,4 +13,5 @@ Config.LINKS = {
     register: `${Config.HOST}/user/register`,
     get_messages: `${Config.HOST}/messages`,
     get_user: `${Config.HOST}/user`,
+    get_user_chats: `${Config.HOST}/user/<id>/chats`,
 }

@@ -28,4 +28,7 @@ onload = () => {
     } else {
         Router.load_page('login');
     }
+    window.addEventListener("beforeinstallprompt", (event) => {
+        console.log(event);
+    });
 }
