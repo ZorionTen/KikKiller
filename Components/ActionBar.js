@@ -3,7 +3,7 @@ export class ActionBar extends Base {
     constructor() {
         super('div');
         this.tabs = document.createElement("div");
-        this.tabs.className = 'z-tab rounded-tr-3xl flex-1 overflow-hidden';
+        this.tabs.className = 'z-tab rounded-tr-3xl rounded-tl-3xl flex-1 overflow-hidden';
         this.element.appendChild(this.tabs);
 
         this.alt_tabs = document.createElement("div");
@@ -14,7 +14,6 @@ export class ActionBar extends Base {
         this.element.className = "action-bar";
         let style = {
             width: "100%",
-            height: "auto",
             padding: "0px",
             paddingTop: '0.5rem',
             justifyContent: "end",
@@ -31,7 +30,7 @@ export class ActionBar extends Base {
     }
     addButton(text, callback = () => { }) {
         let tab = document.createElement("div");
-        tab.className = 'px-5 py-3';
+        tab.className = 'px-1 py-1';
         tab.innerHTML = text;
         this.alt_tabs.appendChild(tab);
     }

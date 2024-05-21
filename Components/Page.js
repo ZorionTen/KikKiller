@@ -22,11 +22,11 @@ export class Page extends Base {
         document.body.appendChild(toast_area);
         this.style(
             {
-                width: "100%",
-                height: "100%",
+                width: "100vw",
                 flexDirection: "column",
                 padding: "0rem",
                 margin: "0px",
+                height:'100%'
             });
         return super.render();
     }

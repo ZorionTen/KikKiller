@@ -6,6 +6,7 @@ export class Card extends Base {
     render() {
         this.style({
             borderRadius: "1rem",
+            overflow: "hidden",
         });
         return super.render();
     }

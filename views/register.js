@@ -34,7 +34,7 @@ export default class Register extends Login {
             }
         ];
         let url = this.getConfig().LINKS.login;
-        let form_header = `<div style="text-align:center;"><img src="assets/logo.png" alt="logo" height="100" width="100"/></div>`;
+        let form_header = `<div class='flex justify-center'><img src="assets/logo.png" alt="logo" height="100" width="100"/></div>`;
         let login_form = new Form(url, "Sign Up", "POST", form_data, (data) => this.doRegister(data), form_header);
         let footer = new Footer();
         footer.addLinks(
