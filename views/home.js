@@ -1,17 +1,29 @@
 import { ActionBar } from '../Components/ActionBar.js';
 import { Page } from '../Components/Page.js';
 import { Card } from '../Components/Card.js';
+import { Button } from '../Components/Button.js';
+
 
 export default class Home extends Page {
     constructor() {
         super('div');
     }
     prepare() {
+
+        this.style({
+            gap: "0rem"
+        });
+
+        let menu = new Card();
         let navbar = new ActionBar();
         navbar.addTab(`<object class='w-64' style="fill:blue;" data="assets/name_logo.svg"></object>`);
-        navbar.addButton(`<object class='h-8' style="fill:blue;" data="assets/settings.svg"></object>`, 'Settings', () => {
-
-        })
+        navbar.addButton(`<object class='h-8' style="fill:blue;" data="assets/settings.svg"></object>`, (e) => {
+            if (menu.element.style.display == "flex") {
+                menu.element.style.display = "none";
+            } else {
+                menu.element.style.display = "flex";
+            }
+        });
         let chat_card = new Card();
         chat_card.style({
             display: "block",
@@ -37,6 +49,26 @@ export default class Home extends Page {
                 }
             }
         });
+        menu.element.className = 'menu';
+        menu.style({
+            display: 'none',
+            flexDirection: 'row',
+            padding: '0rem 1rem ',
+            width: '100%',
+            justifyContent: "end",
+            alignItems: "center",
+            borderRadius: '0rem',
+        });
+        menu.addChildren([
+            new Button('Logout', (e) => {
+                localStorage.clear();
+                window.location.reload();
+            }),
+            new Button('Settings', (e) => {
+               this.getRouter().load_page("settings"); 
+            }),
+        ]);
+        this.append(menu);
         this.append(navbar);
         this.append(chat_card);
     }

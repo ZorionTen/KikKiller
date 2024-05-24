@@ -11,8 +11,8 @@ export class Card extends Base {
         return super.render();
     }
     addChildren(x) {
-        for (let i in x) {
-            this.append(x);
+        for (let i of x) {
+            this.append(i);
         }
     }
 }   

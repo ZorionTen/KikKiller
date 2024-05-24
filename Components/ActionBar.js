@@ -9,6 +9,7 @@ export class ActionBar extends Base {
         this.alt_tabs = document.createElement("div");
         this.alt_tabs.className = 'z-button rounded-bl-3xl overflow-hidden';
         this.element.appendChild(this.alt_tabs);
+        this.callbacks = [];
     }
     render() {
         this.element.className = "action-bar";
@@ -22,17 +23,22 @@ export class ActionBar extends Base {
         this.style(style);
         return super.render();
     }
-    addTab(text, callback = () => { }) {
+    addTab(text, callback = (e) => { console.log(e.target.innerHTML); }) {
         let tab = document.createElement("div");
         tab.className = 'px-5 py-3';
         tab.innerHTML = text;
+        tab.querySelector('*').style.pointerEvents = "none";
+        tab.addEventListener('click', (e) => callback(e));
         this.tabs.appendChild(tab);
     }
-    addButton(text, callback = () => { }) {
+    addButton(text, cb = (e) => { }) {
         let tab = document.createElement("div");
         tab.className = 'px-1 py-1';
         tab.innerHTML = text;
+        tab.querySelector('*').style.pointerEvents = "none";
         this.alt_tabs.appendChild(tab);
+        tab.onclick = (e) => { cb(e); };
+        // tab.addEventListener('click', (e)=>{console.log(e); cb(e)});
     }
     addLinks(x) {
         for (let i in x) {

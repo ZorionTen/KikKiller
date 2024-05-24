@@ -13,14 +13,6 @@ Router.load_page = async (page) => {
     document.body.appendChild(elem);
 }
 
-const components = [];
-
-const render = () => {
-    components.map((x) => {
-        document.body.appendChild(x.render());
-    });
-}
-
 onload = () => {
     if (localStorage.getItem("token")) {
         Router.load_page('home');
@@ -28,7 +20,7 @@ onload = () => {
     } else {
         Router.load_page('login');
     }
-    window.addEventListener("beforeinstallprompt", (event) => {
-        console.log(event);
-    });
+    // window.addEventListener("beforeinstallprompt", (event) => {
+    //     console.log(event);
+    // });
 }
