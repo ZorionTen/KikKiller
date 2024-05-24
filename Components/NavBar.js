@@ -1,7 +1,9 @@
 import { Base } from './Base.js';
 export class NavBar extends Base {
-    constructor() {
+    constructor(links = false) {
         super('nav');
+        if (links)
+            this.addLinks(links);
     }
     render() {
         let style = {
@@ -15,6 +17,10 @@ export class NavBar extends Base {
         this.style(style);
         return super.render();
     }
+    /**
+     * 
+     * @param {object} x {link_text: callback_function()}} 
+     */
     addLinks(x) {
         for (let i in x) {
             let action = document.createElement("span");
@@ -24,5 +30,5 @@ export class NavBar extends Base {
             this.element.appendChild(action);
         }
     }
-    
+
 }   
